@@ -14,7 +14,7 @@ export default (knex) ->
   if _options$logger
     logger = _options$logger
   else
-    logger = (sql, cost)=>
+    logger = (cost, sql, colorize)=>
       sql = colorize sql
       cost = COLORIZE.primary(cost/1000+"s")
       process.stdout.write [PS1, sql, cost].join(" ")
@@ -91,7 +91,7 @@ makeQueryPrinter = (knex, _ref6) ->
     bindings = _ref7.bindings
     duration = _ref7.duration
     sqlRequest = knex.client._formatQuery(sql, if withBindings then bindings else null)
-    logger sqlRequest, duration
+    logger duration, sqlRequest, colorize
     return
 
 measureStartTime = ->
