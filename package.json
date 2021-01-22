@@ -16,6 +16,7 @@
     "@rmw/console": "^0.0.13",
     "knex": "^0.21.16",
     "pg": "^8.5.1",
+    "knex-tiny-logger": "^2.0.0",
     "pg-parse-float": "^0.0.1"
   },
   "devDependencies": {

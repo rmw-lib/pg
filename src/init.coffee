@@ -1,4 +1,5 @@
 import QueryBuilder from 'knex/lib/query/builder'
+import Pg from './pg'
 
 _FUNC_LIST = do =>
   r = []
@@ -43,6 +44,18 @@ export default (proxy, setup)=>
   try
     await init(proxy)
   catch err
-    console.log err
-    console.log err.toString()
-    console.log proxy.$.client.connectionSettings
+    if err.code == '3D000'
+      console.log err.toString()
+      config = proxy.$.client.connectionSettings
+      {database} = config
+      connection = {
+        ...config
+        database:"postgres"
+      }
+      pg = Pg({connection})
+      await pg.$exec("create database #{database}")
+      setup(
+        await init(proxy)
+      )
+      return
+    throw err

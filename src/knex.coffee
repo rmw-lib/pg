@@ -1,4 +1,8 @@
 import Knex from 'knex'
+
+import _knexTinyLogger from 'knex-tiny-logger'
+knexTinyLogger = _knexTinyLogger.default
+
 import QueryBuilder from 'knex/lib/query/builder'
 
 _transaction = Knex.Client::transaction
@@ -200,4 +204,5 @@ export default ->
         console.error obj.bindings
         console.error error.toString()
   )
+  pg = knexTinyLogger pg
   return pg

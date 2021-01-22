@@ -21,7 +21,7 @@ export default (config)->
     pool: { min: 1, max: 8 }
     acquireConnectionTimeout: 60000
     ...config
-    debug:process.env.NODE_ENV == "development"
+    # debug:process.env.NODE_ENV == "development"
     # searchPath: CONFIG.SCHEMA
     # searchPath: ["app", 'public'],
   })
@@ -30,10 +30,10 @@ export default (config)->
 
   li = []
 
-  # for obj in [pg,pg.context]
-  #   for k,v of obj
-  #     if typeof(v) == 'function'
-  #       proxy["$"+k]=v.bind(obj)
+  for obj in [pg,pg.context]
+    for k,v of obj
+      if typeof(v) == 'function'
+        proxy["$"+k]=v.bind(obj)
 
   proxy.$ = pg
 
