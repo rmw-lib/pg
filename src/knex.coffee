@@ -190,7 +190,7 @@ exec : ->
 }
 
 
-export default =>
+export default ->
   pg = Knex.apply @,arguments
   Object.assign(pg, extend)
   pg.on(

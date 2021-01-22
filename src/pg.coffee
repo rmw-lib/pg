@@ -37,7 +37,7 @@ _table = (knex, name)->
   return r
 
 
-module.exports = (config)->
+export default (config)->
   uri = config.uri
   delete config.uri
   pg = knex_pg({
