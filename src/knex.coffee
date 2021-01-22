@@ -1,6 +1,5 @@
-Knex = require('knex')
-{isSet} = require 'lodash'
-QueryBuilder = require('knex/lib/query/builder')
+import Knex from 'knex'
+import QueryBuilder from 'knex/lib/query/builder'
 
 _transaction = Knex.Client::transaction
 Knex.Client::transaction = (container, config)->
@@ -191,7 +190,7 @@ exec : ->
 }
 
 
-module.exports = ->
+export default =>
   pg = Knex.apply @,arguments
   Object.assign(pg, extend)
   pg.on(

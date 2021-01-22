@@ -1,5 +1,10 @@
-_pg = require('pg')
-require('pg-parse-float')(_pg)
+import _pg from 'pg'
+import knex_pg from './knex'
+import pgParseFloat from 'pg-parse-float'
+import QueryBuilder from 'knex/lib/query/builder'
+
+pgParseFloat _pg
+
 _pg.types.setTypeParser(20, parseInt)
 _pg.types.setTypeParser(1016, (v)->
     if v=="{}"
@@ -7,8 +12,6 @@ _pg.types.setTypeParser(1016, (v)->
     v = v.replace(/{/g,"[").replace(/}/g,"]")
     return JSON.parse(v)
 )
-knex_pg = require('./knex')
-QueryBuilder = require('knex/lib/query/builder')
 
 _FUNC_LIST = do =>
   r = []
