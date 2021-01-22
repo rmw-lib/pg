@@ -10,7 +10,16 @@ COLORIZE =
 export default (knex) ->
   options = if arguments.length <= 1 or arguments[1] == undefined then {} else arguments[1]
   _options$logger = options.logger
-  logger = if _options$logger == undefined then console.log else _options$logger
+
+  if _options$logger
+    logger = (sql, cost)=>
+      sql = colorize sql
+      cost = COLORIZE.primary(cost/1000+"s")
+      process.stdout.write [PS1, sql, cost].join(" ")
+      return
+  else
+    logger = _options$logger
+
   _options$bindings = options.bindings
   withBindings = if _options$bindings == undefined then true else _options$bindings
   queries = new Map
@@ -82,7 +91,7 @@ makeQueryPrinter = (knex, _ref6) ->
     bindings = _ref7.bindings
     duration = _ref7.duration
     sqlRequest = knex.client._formatQuery(sql, if withBindings then bindings else null)
-    logger "#{PS1}%s %s", colorize(sqlRequest), COLORIZE.primary(duration.toFixed(2) + ' ms ')
+    logger sqlRequest, duration
     return
 
 measureStartTime = ->
