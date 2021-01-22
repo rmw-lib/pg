@@ -12,7 +12,7 @@ do =>
     host : "127.0.0.1"
     port : 49102
     database : rmw
-    username: rmw
+    user: rmw
   }
     if k not of connection
       connection[k] = v
