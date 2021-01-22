@@ -14,10 +14,9 @@
   "dependencies": {
     "@rmw/config": "^0.0.18",
     "@rmw/console": "^0.0.13",
+    "chalk": "^4.1.0",
     "knex": "^0.21.16",
-    "knex-tiny-logger": "^2.0.0",
     "pg": "^8.5.1",
-    "pg-native": "^3.0.0",
     "pg-parse-float": "^0.0.1"
   },
   "devDependencies": {

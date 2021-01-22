@@ -1,7 +1,6 @@
 import Knex from 'knex'
 
-import _knexTinyLogger from 'knex-tiny-logger'
-knexTinyLogger = _knexTinyLogger.default
+import knexTinyLogger from './log'
 
 import QueryBuilder from 'knex/lib/query/builder'
 
@@ -204,5 +203,6 @@ export default ->
         console.error obj.bindings
         console.error error.toString()
   )
-  pg = knexTinyLogger pg
+  if process.env.NODE_ENV == "development"
+    pg = knexTinyLogger pg
   return pg
