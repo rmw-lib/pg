@@ -1,6 +1,6 @@
 import _chalk from 'chalk'
 
-PS1 = "🔸 "
+PS1 = "🔸"
 
 COLORIZE =
   primary: _chalk.gray
