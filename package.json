@@ -12,6 +12,7 @@
     "/lib"
   ],
   "dependencies": {
+    "@rmw/config": "^0.0.18",
     "@rmw/console": "^0.0.13"
   },
   "devDependencies": {
