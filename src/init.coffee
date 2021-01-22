@@ -39,10 +39,11 @@ init = (proxy)=>
     for name in table_li
       schema[name] = _table(pg, schema_name+"."+name)
     proxy[schema_name] = schema
+  return pg
 
 export default (proxy, setup)=>
   try
-    await init(proxy)
+    return await init(proxy)
   catch err
     if err.code == '3D000'
       console.log err.toString()
