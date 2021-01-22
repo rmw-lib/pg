@@ -9,9 +9,9 @@ do =>
   )
   connection = config.connection = config.connection or {}
 
-if not config.password
-  config.password = randomBytes(16).toString('base64')
-  CONFIG.pg = {...config}
+  if not config.password
+    config.password = randomBytes(16).toString('base64')
+    CONFIG.pg = {...config}
 
   rmw = "rmw"
   for k,v of {
