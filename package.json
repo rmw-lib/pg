@@ -17,7 +17,8 @@
     "chalk": "^4.1.0",
     "knex": "^0.21.16",
     "pg": "^8.5.1",
-    "pg-parse-float": "^0.0.1"
+    "pg-parse-float": "^0.0.1",
+    "urlsafe-base64": "^1.0.0"
   },
   "devDependencies": {
     "@rmw/md-include": "^0.4.5",
