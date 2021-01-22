@@ -39,7 +39,7 @@ init = (proxy)=>
     for name in table_li
       schema[name] = _table(pg, schema_name+"."+name)
     proxy[schema_name] = schema
-  return pg
+  return proxy
 
 export default (proxy, setup)=>
   try
