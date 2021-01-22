@@ -1,0 +1,30 @@
+{
+  "name": "@rmw/pg",
+  "version": "0.0.0",
+  "repository": "https://github.com/rmw-lib/pg",
+  "author": "i@rmw.link",
+  "license": "MulanPSL-2.0",
+  "exports": {
+    ".": "./lib/index.js",
+    "./*": "./lib/*"
+  },
+  "files": [
+    "/lib"
+  ],
+  "dependencies": {
+    "@rmw/console": "^0.0.13"
+  },
+  "devDependencies": {
+    "@rmw/md-include": "^0.4.5",
+    "coffeescript": "^2.5.1",
+    "colortape": "^0.1.2",
+    "nodemon": "^2.0.7",
+    "source-map-support": "^0.5.19",
+    "tape": "^5.1.1",
+    "tape-catch": "^1.0.6"
+  },
+  "scripts": {
+    "prepare": "./.git/hooks/pre-commit && rm -rf lib && rsync -av --include='*/' --include='*.js' --include='*.mjs' --exclude=* src/ lib/ && npx coffee --compile --output lib src/"
+  },
+  "type": "module"
+}
