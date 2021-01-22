@@ -12,13 +12,13 @@ export default (knex) ->
   _options$logger = options.logger
 
   if _options$logger
+    logger = _options$logger
+  else
     logger = (sql, cost)=>
       sql = colorize sql
       cost = COLORIZE.primary(cost/1000+"s")
       process.stdout.write [PS1, sql, cost].join(" ")
       return
-  else
-    logger = _options$logger
 
   _options$bindings = options.bindings
   withBindings = if _options$bindings == undefined then true else _options$bindings
