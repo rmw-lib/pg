@@ -10,6 +10,8 @@ do =>
   for k,v of {
     host : "127.0.0.1"
     port : 14102
+    db : "rmw"
+    user: "postgres"
   }
     if k not of config
       config[k] = v
