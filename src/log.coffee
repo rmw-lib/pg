@@ -16,8 +16,8 @@ export default (knex) ->
   else
     logger = (cost, sql, colorize)=>
       sql = colorize sql
-      cost = COLORIZE.primary(cost/1000+"s")
-      process.stdout.write [PS1, sql, cost].join(" ")
+      cost = COLORIZE.primary((cost/1000).toFixed(3)+"s")
+      process.stdout.write [PS1, sql, cost].join(" ")+"\n"
       return
 
   _options$bindings = options.bindings
