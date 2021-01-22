@@ -4,6 +4,6 @@ import pgInit from '@rmw/pg/init'
 do =>
   await pgInit(
     PG
-    (setup)=>
+    (pg)=>
       console.log "!!! setup"
   )

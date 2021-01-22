@@ -54,8 +54,12 @@ export default (proxy, setup)=>
       }
       pg = Pg({connection})
       await pg.$exec("create database #{database}")
-      setup(
-        await init(proxy)
-      )
+      try
+        await setup(
+          await init(proxy)
+        )
+      catch err
+        console.trace err
+        await pg.$exec("drop database #{database}")
       return
     throw err
