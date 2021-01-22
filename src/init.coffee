@@ -61,6 +61,6 @@ export default (proxy, setup)=>
         )
       catch err
         console.trace err
-        await pg.$exec("drop database #{database}")
+        # await pg.$exec("drop database #{database}")
       return
     throw err
