@@ -1,5 +1,5 @@
 import _chalk from 'chalk'
-
+import {formatQuery} from 'knex/lib/execution/internal/query-executioner'
 PS1 = "🔸"
 
 COLORIZE =
@@ -69,7 +69,7 @@ export default (knex) ->
   withQuery = (queryId, fn) ->
     query = queries.get(queryId)
     queries.delete queryId
-    if !query
+    if not query
       throw new TypeError('Query disappeared')
     sql = query.sql
     bindings = query.bindings
@@ -90,7 +90,7 @@ makeQueryPrinter = (knex, _ref6) ->
     sql = _ref7.sql
     bindings = _ref7.bindings
     duration = _ref7.duration
-    sqlRequest = knex.client._formatQuery(sql, if withBindings then bindings else null)
+    sqlRequest = formatQuery(sql, if withBindings then bindings else null)
     logger duration, sqlRequest, colorize
     return
 

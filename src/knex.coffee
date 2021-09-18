@@ -2,22 +2,24 @@ import Knex from 'knex'
 
 import knexTinyLogger from './log'
 
-import QueryBuilder from 'knex/lib/query/builder'
+import QueryBuilder from 'knex/lib/query/querybuilder'
 
 _transaction = Knex.Client::transaction
 Knex.Client::transaction = (container, config)->
-    _transaction.call(
-        @
-        (trx)->
-            Object.assign(trx,extend)
-            container.apply @,arguments
-        config
-    )
+  _transaction.call(
+    @
+    (trx)->
+      Object.assign(trx,extend)
+      container.apply @,arguments
+    config
+  )
 
 
 Object.assign(
   QueryBuilder.prototype
   {
+  insert_id:->
+    (await @insert(...arguments).returning('id'))[0]
   dict:->
     li = await @select(
       ["id","val"]
@@ -59,13 +61,13 @@ Object.assign(
     await @upsert({val},{id})
 
   val:(id)->
-      r = await @get({id}, 'val')
-      if r
-          return r.val
+    r = await @get({id}, 'val')
+    if r
+      return r.val
 
   val_id: (val)->
     return await @upsert(
-        {val}
+      {val}
     )
 
   get: (dict, column)->
@@ -177,6 +179,12 @@ dict:->
     r[k] = v
   r
 
+val:->
+  r = await @li.apply(@,arguments)
+  if r.length
+    return r[0][0]
+  return
+
 li1:->
   r = []
   for i in await @li.apply(@,arguments)
@@ -197,12 +205,12 @@ export default ->
   pg = Knex.apply @,arguments
   Object.assign(pg, extend)
   pg.on(
-      'query-error'
-      (error, obj)->
-        console.error obj.sql
-        console.error obj.bindings
-        console.error error.toString()
+    'query-error'
+    (error, obj)=>
+      console.error obj.sql
+      console.error obj.bindings
+      console.error error.toString()
   )
-  if process.env.NODE_ENV == "development"
+  if process.env.NODE_ENV != "production"
     pg = knexTinyLogger pg
   return pg

@@ -1,28 +1,7 @@
-import QueryBuilder from 'knex/lib/query/builder'
-import Pg from './pg'
+import QueryBuilder from 'knex/lib/query/querybuilder'
+import Pg from './index'
 
-_FUNC_LIST = do =>
-  r = []
-  for k,v of QueryBuilder.prototype
-   if typeof(v)=='function'
-     r.push k
-  return r
 
-_warp = (self, name, func)->
-  get : ->
-    o = self(name)
-    return o[func].bind(o)
-
-_table = (knex, name)->
-  table = new Function()
-  for func in _FUNC_LIST
-    Object.defineProperty(
-      table.prototype
-      func
-      _warp(knex, name, func)
-    )
-  r = new table()
-  return r
 
 init = (proxy)=>
   pg = proxy.$
@@ -37,7 +16,7 @@ init = (proxy)=>
     )
     # 不能创建为name的表名， 会被function的name覆盖
     for name in table_li
-      schema[name] = _table(pg, schema_name+"."+name)
+      schema[name] = pg schema_name+"."+name
     proxy[schema_name] = schema
   return proxy
 
