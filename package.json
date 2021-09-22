@@ -1,6 +1,6 @@
 {
   "name": "@rmw/pg",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "repository": "https://github.com/rmw-lib/pg",
   "author": "i@rmw.link",
   "license": "MulanPSL-2.0",
