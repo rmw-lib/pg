@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@rmw/md-include": "^0.4.5",
-    "coffeescript": "^2.5.1",
+    "coffeescript": "^2.6.0",
     "colortape": "^0.1.2",
     "nodemon": "^2.0.12",
     "source-map-support": "^0.5.20",
