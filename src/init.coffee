@@ -2,6 +2,17 @@ import QueryBuilder from 'knex/lib/query/querybuilder'
 import Pg from './index'
 
 
+defineProperty = (pg, schema, name)=>
+  n = schema + "." + name
+  Object.defineProperty(
+    schema
+    name
+    {
+      configurable: false
+      get:=>
+        pg n
+    }
+  )
 
 init = (proxy)=>
   pg = proxy.$
@@ -16,7 +27,8 @@ init = (proxy)=>
     )
     # 不能创建为name的表名， 会被function的name覆盖
     for name in table_li
-      schema[name] = pg schema_name+"."+name
+      defineProperty pg, schema, name
+
     proxy[schema_name] = schema
   return proxy
 
